@@ -1,4 +1,5 @@
-import questionsData from '@/data/questions.json'
+import deData from '@/data/questions.json'
+import genaiData from '@/data/genai-questions.json'
 
 export interface Question {
   num: number
@@ -11,13 +12,26 @@ export interface Question {
   explanation_images?: string[]
 }
 
-export const questions: Question[] = questionsData as Question[]
+export const deQuestions: Question[] = deData as Question[]
+export const genaiQuestions: Question[] = genaiData as Question[]
+
+// Legacy alias for existing DE pages
+export const questions = deQuestions
 
 export function getQuestion(num: number): Question | undefined {
-  return questions.find((q) => q.num === num)
+  return deQuestions.find((q) => q.num === num)
 }
 
 export function getQuestions(nums?: number[]): Question[] {
-  if (!nums) return questions
-  return questions.filter((q) => nums.includes(q.num))
+  if (!nums) return deQuestions
+  return deQuestions.filter((q) => nums.includes(q.num))
+}
+
+export function getGenaiQuestion(num: number): Question | undefined {
+  return genaiQuestions.find((q) => q.num === num)
+}
+
+export function getGenaiQuestions(nums?: number[]): Question[] {
+  if (!nums) return genaiQuestions
+  return genaiQuestions.filter((q) => nums.includes(q.num))
 }
