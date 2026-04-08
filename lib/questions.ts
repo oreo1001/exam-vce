@@ -3,12 +3,12 @@ import questionsData from '@/data/questions.json'
 export interface Question {
   num: number
   question: string
-  choices: { letter: string; text: string }[]
+  choices: { letter: string; text: string; image?: string }[]
   correct: string
   correct_list: string[]
   explanation: string
   question_images: string[]
-  explanation_images: string[]
+  explanation_images?: string[]
 }
 
 export const questions: Question[] = questionsData as Question[]

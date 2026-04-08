@@ -989,11 +989,23 @@
     "choices": [
       {
         "letter": "A",
-        "text": "B."
+        "text": "",
+        "image": "/images/q33_img0.jpeg"
+      },
+      {
+        "letter": "B",
+        "text": "",
+        "image": "/images/q33_img1.jpeg"
       },
       {
         "letter": "C",
-        "text": "D."
+        "text": "",
+        "image": "/images/q33_img2.jpeg"
+      },
+      {
+        "letter": "D",
+        "text": "",
+        "image": "/images/q33_img3.jpeg"
       }
     ],
     "correct": "D",
@@ -1001,12 +1013,7 @@
       "D"
     ],
     "explanation": "",
-    "question_images": [
-      "/images/q33_img0.jpeg",
-      "/images/q33_img1.jpeg",
-      "/images/q33_img2.jpeg",
-      "/images/q33_img3.jpeg"
-    ],
+    "question_images": [],
     "explanation_images": []
   },
   {
@@ -1358,11 +1365,28 @@
     "choices": [
       {
         "letter": "A",
-        "text": "B."
+        "text": "",
+        "image": "/images/q45_img0.jpeg"
+      },
+      {
+        "letter": "B",
+        "text": "",
+        "image": "/images/q45_img1.jpeg"
       },
       {
         "letter": "C",
-        "text": "D."
+        "text": "",
+        "image": "/images/q45_img2.jpeg"
+      },
+      {
+        "letter": "D",
+        "text": "",
+        "image": "/images/q45_img3.jpeg"
+      },
+      {
+        "letter": "E",
+        "text": "",
+        "image": "/images/q45_img4.jpeg"
       }
     ],
     "correct": "A",
@@ -1370,13 +1394,7 @@
       "A"
     ],
     "explanation": "CREATE OR REPLACE FUNCTION transform_city(city STRING)\nRETURNS STRING\nRETURN CASE\nWHEN city IS NULL THEN 'Unknown'\nELSE upper(city)\nEND;\n또는 단순화한 형태:\nCREATE OR REPLACE FUNCTION transform_city(city STRING)\nRETURNS STRING\nRETURN upper(city);",
-    "question_images": [
-      "/images/q45_img0.jpeg",
-      "/images/q45_img1.jpeg",
-      "/images/q45_img2.jpeg",
-      "/images/q45_img3.jpeg",
-      "/images/q45_img4.jpeg"
-    ],
+    "question_images": [],
     "explanation_images": []
   },
   {
@@ -1610,11 +1628,28 @@
     "choices": [
       {
         "letter": "A",
-        "text": "B."
+        "text": "",
+        "image": "/images/q53_img0.jpeg"
+      },
+      {
+        "letter": "B",
+        "text": "",
+        "image": "/images/q53_img1.jpeg"
       },
       {
         "letter": "C",
-        "text": "D."
+        "text": "",
+        "image": "/images/q53_img2.jpeg"
+      },
+      {
+        "letter": "D",
+        "text": "",
+        "image": "/images/q53_img3.jpeg"
+      },
+      {
+        "letter": "E",
+        "text": "",
+        "image": "/images/q53_img4.jpeg"
       }
     ],
     "correct": "D",
@@ -1622,13 +1657,7 @@
       "D"
     ],
     "explanation": "def add_numbers(a, b):\nreturn a + b\ndef add_numbers(a, b): → 함수 정의\nreturn a + b → 두 매개변수의 합을 반환",
-    "question_images": [
-      "/images/q53_img0.jpeg",
-      "/images/q53_img1.jpeg",
-      "/images/q53_img2.jpeg",
-      "/images/q53_img3.jpeg",
-      "/images/q53_img4.jpeg"
-    ],
+    "question_images": [],
     "explanation_images": []
   },
   {
@@ -1726,11 +1755,23 @@
     "choices": [
       {
         "letter": "A",
-        "text": "B."
+        "text": "",
+        "image": "/images/q57_img0.jpeg"
+      },
+      {
+        "letter": "B",
+        "text": "",
+        "image": "/images/q57_img1.jpeg"
       },
       {
         "letter": "C",
-        "text": "D."
+        "text": "",
+        "image": "/images/q57_img2.jpeg"
+      },
+      {
+        "letter": "D",
+        "text": "",
+        "image": "/images/q57_img3.jpeg"
       }
     ],
     "correct": "C",
@@ -1738,12 +1779,7 @@
       "C"
     ],
     "explanation": "CREATE STREAMING LIVE TABLE orders_valid → DLT에서 스트리밍 테이블 정의\nSTREAMING live.orders_raw → 기존 스트리밍 테이블 읽기\nWHERE order_datetime IS NOT NULL → NULL 값 필터링",
-    "question_images": [
-      "/images/q57_img0.jpeg",
-      "/images/q57_img1.jpeg",
-      "/images/q57_img2.jpeg",
-      "/images/q57_img3.jpeg"
-    ],
+    "question_images": [],
     "explanation_images": []
   },
   {
@@ -1942,11 +1978,23 @@
     "choices": [
       {
         "letter": "A",
-        "text": "B."
+        "text": "",
+        "image": "/images/q64_img0.jpeg"
+      },
+      {
+        "letter": "B",
+        "text": "",
+        "image": "/images/q64_img1.jpeg"
       },
       {
         "letter": "C",
-        "text": "D."
+        "text": "",
+        "image": "/images/q64_img2.jpeg"
+      },
+      {
+        "letter": "D",
+        "text": "",
+        "image": "/images/q64_img3.jpeg"
       }
     ],
     "correct": "A",
@@ -1954,12 +2002,7 @@
       "A"
     ],
     "explanation": "-- 1. 카탈로그 사용 권한 부여\nGRANT USAGE ON CATALOG manufacturing TO `manufacturing-team`;\n-- 2. 스키마 사용 권한 부여\nGRANT USAGE ON SCHEMA manufacturing.production TO `manufacturing-team`;\n-- 3. 스키마 내 테이블 생성 권한 부여\nGRANT CREATE ON SCHEMA manufacturing.production TO `manufacturing-team`;\nUSAGE ON CATALOG → 카탈로그 접근 권한\nUSAGE ON SCHEMA → 스키마 접근 권한\nCREATE ON SCHEMA → 스키마 내 테이블 생성 가능\n이렇게 하면 최소 권한(least privilege) 원칙을 유지하면서 manufacturing-team이 지정 스키마에서 테이블을 생성할 수 있습\n니다.",
-    "question_images": [
-      "/images/q64_img0.jpeg",
-      "/images/q64_img1.jpeg",
-      "/images/q64_img2.jpeg",
-      "/images/q64_img3.jpeg"
-    ],
+    "question_images": [],
     "explanation_images": []
   },
   {
@@ -2059,11 +2102,23 @@
     "choices": [
       {
         "letter": "A",
-        "text": "B."
+        "text": "",
+        "image": "/images/q68_img0.jpeg"
+      },
+      {
+        "letter": "B",
+        "text": "",
+        "image": "/images/q68_img1.jpeg"
       },
       {
         "letter": "C",
-        "text": "D."
+        "text": "",
+        "image": "/images/q68_img2.jpeg"
+      },
+      {
+        "letter": "D",
+        "text": "",
+        "image": "/images/q68_img3.jpeg"
       }
     ],
     "correct": "D",
@@ -2071,12 +2126,7 @@
       "D"
     ],
     "explanation": "",
-    "question_images": [
-      "/images/q68_img0.jpeg",
-      "/images/q68_img1.jpeg",
-      "/images/q68_img2.jpeg",
-      "/images/q68_img3.jpeg"
-    ],
+    "question_images": [],
     "explanation_images": []
   },
   {
@@ -2370,11 +2420,28 @@
     "choices": [
       {
         "letter": "A",
-        "text": "B."
+        "text": "",
+        "image": "/images/q78_img0.jpeg"
+      },
+      {
+        "letter": "B",
+        "text": "",
+        "image": "/images/q78_img1.jpeg"
       },
       {
         "letter": "C",
-        "text": "D."
+        "text": "",
+        "image": "/images/q78_img2.jpeg"
+      },
+      {
+        "letter": "D",
+        "text": "",
+        "image": "/images/q78_img3.jpeg"
+      },
+      {
+        "letter": "E",
+        "text": "",
+        "image": "/images/q78_img4.jpeg"
       }
     ],
     "correct": "E",
@@ -2382,13 +2449,7 @@
       "E"
     ],
     "explanation": "집계된 테이블 작업 시 출력 모드로 \"추가\" 대신 \"완료\"를 사용하는 것이 가장 좋습니다.\n골드 레이어는 최종 집계 테이블이므로, 출력 모드를 완료(complete)로 설정하는 유일한 옵션은 E 옵션입니다.",
-    "question_images": [
-      "/images/q78_img0.jpeg",
-      "/images/q78_img1.jpeg",
-      "/images/q78_img2.jpeg",
-      "/images/q78_img3.jpeg",
-      "/images/q78_img4.jpeg"
-    ],
+    "question_images": [],
     "explanation_images": []
   },
   {
@@ -3648,11 +3709,23 @@
     "choices": [
       {
         "letter": "A",
-        "text": "B."
+        "text": "",
+        "image": "/images/q118_img0.jpeg"
+      },
+      {
+        "letter": "B",
+        "text": "",
+        "image": "/images/q118_img1.jpeg"
       },
       {
         "letter": "C",
-        "text": "D."
+        "text": "",
+        "image": "/images/q118_img2.jpeg"
+      },
+      {
+        "letter": "D",
+        "text": "",
+        "image": "/images/q118_img3.jpeg"
       }
     ],
     "correct": "D",
@@ -3660,12 +3733,7 @@
       "D"
     ],
     "explanation": "원시 데이터에서 Bronze 테이블로 스트리밍 홉을 수행하는 쿼리는 Spark 스트리밍 읽기 기능을 사용하여 식별한 다음 Bronze\n테이블에 씁니다.\n* 옵션 A: .writeStream을 사용하지만, Bronze 테이블로의 홉보다는 요약된 테이블로의 롤업에 더 가까운 전체 집계를 수행합니\n다.\n* 옵션 B: .writeStream도 사용하지만 평균을 계산하는데, 이는 일반적으로\n최소한의 변환만 포함하는 원시 데이터에서 Bronze 테이블로의 변환을 나타내지 않습니다.\n* 옵션 C: 이 옵션은 스트리밍 작업이 아닌 .mode(\"append\")를 사용하는 기본 .write를 사용하므로\nBronze 테이블로의 실시간 스트리밍 데이터 변환에는 적합하지 않습니다.\n* 옵션 D: spark.readStream.load()를 사용하여 원시 데이터를 스트림으로 수집한 다음 .writeStream을 사용하여 씁니다.\n이는 원시 데이터가 실시간으로 캡처되고 최소한의 변환이 적용되는 Bronze 테이블로 스트리밍 데이터를 변환하는 일반적인 패턴\n입니다.\n이러한 접근 방식은 원시 데이터가 지속적으로 수집되어 더 쉽게 접근할 수 있는 형식으로 저장되는 최신 데이터 아키텍처의\nBronze 테이블 개념과 일치합니다.",
-    "question_images": [
-      "/images/q118_img0.jpeg",
-      "/images/q118_img1.jpeg",
-      "/images/q118_img2.jpeg",
-      "/images/q118_img3.jpeg"
-    ],
+    "question_images": [],
     "explanation_images": []
   },
   {
@@ -3963,11 +4031,23 @@
     "choices": [
       {
         "letter": "A",
-        "text": "B."
+        "text": "",
+        "image": "/images/q128_img0.jpeg"
+      },
+      {
+        "letter": "B",
+        "text": "",
+        "image": "/images/q128_img1.jpeg"
       },
       {
         "letter": "C",
-        "text": "D."
+        "text": "",
+        "image": "/images/q128_img2.jpeg"
+      },
+      {
+        "letter": "D",
+        "text": "",
+        "image": "/images/q128_img3.jpeg"
       }
     ],
     "correct": "B",
@@ -3975,12 +4055,7 @@
       "B"
     ],
     "explanation": "@dlt.table 데코레이터를 사용하여 DLT 테이블 정의\nspark.read.json(\"/path/to/raw/json/files\") → JSON 파일 읽기\n함수 반환값으로 DataFrame을 지정하면 자동으로 Delta 테이블 생성\n이후 Silver/Gold 레이어로 데이터를 메달리온 아키텍처 기반으로 변환 가능",
-    "question_images": [
-      "/images/q128_img0.jpeg",
-      "/images/q128_img1.jpeg",
-      "/images/q128_img2.jpeg",
-      "/images/q128_img3.jpeg"
-    ],
+    "question_images": [],
     "explanation_images": []
   },
   {
@@ -4153,31 +4228,28 @@
     "choices": [
       {
         "letter": "A",
-        "text": "B."
-      },
-      {
-        "letter": "C",
-        "text": "D."
-      },
-      {
-        "letter": "E",
-        "text": "A. Option A"
+        "text": "",
+        "image": "/images/q134_img3.jpeg"
       },
       {
         "letter": "B",
-        "text": "Option B"
+        "text": "",
+        "image": "/images/q134_img4.jpeg"
       },
       {
         "letter": "C",
-        "text": "Option C"
+        "text": "",
+        "image": "/images/q134_img5.jpeg"
       },
       {
         "letter": "D",
-        "text": "Option D"
+        "text": "",
+        "image": "/images/q134_img6.jpeg"
       },
       {
         "letter": "E",
-        "text": "Option E"
+        "text": "",
+        "image": "/images/q134_img7.jpeg"
       }
     ],
     "correct": "C",
@@ -4188,12 +4260,7 @@
     "question_images": [
       "/images/q134_img0.jpeg",
       "/images/q134_img1.jpeg",
-      "/images/q134_img2.jpeg",
-      "/images/q134_img3.jpeg",
-      "/images/q134_img4.jpeg",
-      "/images/q134_img5.jpeg",
-      "/images/q134_img6.jpeg",
-      "/images/q134_img7.jpeg"
+      "/images/q134_img2.jpeg"
     ],
     "explanation_images": []
   },
@@ -4331,11 +4398,23 @@
     "choices": [
       {
         "letter": "A",
-        "text": "B."
+        "text": "",
+        "image": "/images/q139_img0.jpeg"
+      },
+      {
+        "letter": "B",
+        "text": "",
+        "image": "/images/q139_img1.jpeg"
       },
       {
         "letter": "C",
-        "text": "D."
+        "text": "",
+        "image": "/images/q139_img2.jpeg"
+      },
+      {
+        "letter": "D",
+        "text": "",
+        "image": "/images/q139_img3.jpeg"
       }
     ],
     "correct": "A",
@@ -4343,12 +4422,7 @@
       "A"
     ],
     "explanation": "데이터 엔지니어가 PySpark DataFrame df에서 각 제품별 총 매출(total revenue), 평균 매출(average revenue), 거래 수\n(transaction count)를 계산하려면 groupBy와 agg를 사용하면 됩니다.\n예시 코드:\nfrom pyspark.sql import functions as F\nresult = df.groupBy(\"product\").agg(\nF.sum(\"revenue\").alias(\"total_revenue\"),\nF.avg(\"revenue\").alias(\"average_revenue\"),\nF.count(\"revenue\").alias(\"transaction_count\")\n)\nresult.show()\n설명:\ngroupBy(\"product\"): 제품별 그룹화\nagg(...): 여러 집계 함수를 한 번에 적용\nF.sum(\"revenue\") → 총 매출\nF.avg(\"revenue\") → 평균 매출\nF.count(\"revenue\") → 거래 수\nalias(...) → 결과 컬럼 이름 지정",
-    "question_images": [
-      "/images/q139_img0.jpeg",
-      "/images/q139_img1.jpeg",
-      "/images/q139_img2.jpeg",
-      "/images/q139_img3.jpeg"
-    ],
+    "question_images": [],
     "explanation_images": []
   },
   {

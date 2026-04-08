@@ -119,7 +119,15 @@ export default function QuestionCard({
               disabled={mode === 'study' && checked}
             >
               <span className={getLetterBadge(choice.letter)}>{choice.letter}</span>
-              <span className="pt-0.5 flex-1">{choice.text}</span>
+              {choice.image ? (
+                <img
+                  src={choice.image}
+                  alt={`선택지 ${choice.letter}`}
+                  className="max-w-full rounded border border-gray-200 dark:border-gray-700"
+                />
+              ) : (
+                <span className="pt-0.5 flex-1">{choice.text}</span>
+              )}
               {checked && mode === 'study' && question.correct_list.includes(choice.letter) && (
                 <span className="flex-shrink-0 text-green-500 text-lg">✓</span>
               )}
