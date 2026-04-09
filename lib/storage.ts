@@ -112,6 +112,8 @@ export function createSubjectStorage(prefix: string): SubjectStorage {
 
 export const deStorage = createSubjectStorage('de')
 export const genaiStorage = createSubjectStorage('genai')
+export const aieStorage = createSubjectStorage('aie')
+export const deV1565Storage = createSubjectStorage('de-v1565')
 
 // --------------- Legacy DE functions (existing DE pages at /study, /test, /wrong unchanged) ---------------
 
