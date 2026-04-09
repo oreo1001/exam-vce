@@ -1,0 +1,41 @@
+-- 학습 기록
+create table study_answers (
+  id uuid default gen_random_uuid() primary key,
+  user_id uuid references auth.users(id) on delete cascade not null,
+  subject text not null,
+  question_num integer not null,
+  selected text[] not null,
+  correct boolean not null,
+  updated_at timestamptz default now(),
+  unique(user_id, subject, question_num)
+);
+
+-- 오답노트
+create table wrong_questions (
+  id uuid default gen_random_uuid() primary key,
+  user_id uuid references auth.users(id) on delete cascade not null,
+  subject text not null,
+  question_num integer not null,
+  added_at timestamptz default now(),
+  unique(user_id, subject, question_num)
+);
+
+-- 시험 결과
+create table test_results (
+  id uuid default gen_random_uuid() primary key,
+  user_id uuid references auth.users(id) on delete cascade not null,
+  subject text not null,
+  score integer not null,
+  total integer not null,
+  elapsed integer not null,
+  taken_at timestamptz default now()
+);
+
+-- 본인 데이터만 접근 가능하도록 RLS 설정
+alter table study_answers enable row level security;
+alter table wrong_questions enable row level security;
+alter table test_results enable row level security;
+
+create policy "본인 데이터만" on study_answers for all using (auth.uid() = user_id);
+create policy "본인 데이터만" on wrong_questions for all using (auth.uid() = user_id);
+create policy "본인 데이터만" on test_results for all using (auth.uid() = user_id);

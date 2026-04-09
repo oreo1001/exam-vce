@@ -1,5 +1,14 @@
 'use client'
 
+import { getCurrentUserId } from './currentUser'
+import {
+  dbWriteStudyAnswer,
+  dbWriteWrongQuestions,
+  dbWriteTestResult,
+  dbClearStudyAnswers,
+  dbClearWrongQuestions,
+} from './dbStorage'
+
 export interface StudyAnswer {
   selected: string[]
   correct: boolean
@@ -51,11 +60,15 @@ export function createSubjectStorage(prefix: string): SubjectStorage {
       const answers = this.getStudyAnswers()
       answers[questionNum] = answer
       localStorage.setItem(studyKey, JSON.stringify(answers))
+      const uid = getCurrentUserId()
+      if (uid) dbWriteStudyAnswer(uid, prefix, questionNum, answer)
     },
 
     clearStudyAnswers(): void {
       if (typeof window === 'undefined') return
       localStorage.removeItem(studyKey)
+      const uid = getCurrentUserId()
+      if (uid) dbClearStudyAnswers(uid, prefix)
     },
 
     getStudyStats(total: number) {
@@ -76,6 +89,8 @@ export function createSubjectStorage(prefix: string): SubjectStorage {
     setWrongQuestions(nums: number[]): void {
       if (typeof window === 'undefined') return
       localStorage.setItem(wrongKey, JSON.stringify(nums))
+      const uid = getCurrentUserId()
+      if (uid) dbWriteWrongQuestions(uid, prefix, nums)
     },
 
     addWrongQuestion(num: number): void {
@@ -93,6 +108,8 @@ export function createSubjectStorage(prefix: string): SubjectStorage {
     clearWrongQuestions(): void {
       if (typeof window === 'undefined') return
       localStorage.removeItem(wrongKey)
+      const uid = getCurrentUserId()
+      if (uid) dbClearWrongQuestions(uid, prefix)
     },
 
     getTestResults(): TestResults | null {
@@ -106,6 +123,8 @@ export function createSubjectStorage(prefix: string): SubjectStorage {
     setTestResults(results: TestResults): void {
       if (typeof window === 'undefined') return
       sessionStorage.setItem(testKey, JSON.stringify(results))
+      const uid = getCurrentUserId()
+      if (uid) dbWriteTestResult(uid, prefix, results)
     },
   }
 }
