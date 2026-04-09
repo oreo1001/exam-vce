@@ -1,4 +1,4 @@
-import deData from '@/data/questions.json'
+import deData from '@/data/de-questions.json'
 import genaiData from '@/data/genai-questions.json'
 
 export interface Question {
