@@ -1,7 +1,8 @@
-import deData from '@/data/de-questions.json'
-import genaiData from '@/data/genai-questions.json'
-import aieData from '@/data/aie-questions.json'
-import deV1565Data from '@/data/de-v1565-questions.json'
+import deV1495Data from '@/data/de-v1495-q-ko.json'
+import deV1565Data from '@/data/de-v1565-q-ko.json'
+import genaiV1265Data from '@/data/genai-v1265-q-ko.json'
+import genaiV1295DataKo from '@/data/genai-v1295-q-ko.json'
+import genaiV1295DataEn from '@/data/genai-v1295-q-en.json'
 
 export interface Question {
   num: number
@@ -14,37 +15,15 @@ export interface Question {
   explanation_images?: string[]
 }
 
-export const deQuestions: Question[] = deData as Question[]
-export const genaiQuestions: Question[] = genaiData as Question[]
-export const aieQuestions: Question[] = aieData as Question[]
+export const deV1495Questions: Question[] = deV1495Data as Question[]
 export const deV1565Questions: Question[] = deV1565Data as Question[]
+export const genaiV1265Questions: Question[] = genaiV1265Data as Question[]
+export const genaiV1295QuestionsKo: Question[] = genaiV1295DataKo as Question[]
+export const genaiV1295QuestionsEn: Question[] = genaiV1295DataEn as Question[]
 
-// Legacy alias for existing DE pages
-export const questions = deQuestions
-
-export function getQuestion(num: number): Question | undefined {
-  return deQuestions.find((q) => q.num === num)
-}
-
-export function getQuestions(nums?: number[]): Question[] {
-  if (!nums) return deQuestions
-  return deQuestions.filter((q) => nums.includes(q.num))
-}
-
-export function getGenaiQuestion(num: number): Question | undefined {
-  return genaiQuestions.find((q) => q.num === num)
-}
-
-export function getGenaiQuestions(nums?: number[]): Question[] {
-  if (!nums) return genaiQuestions
-  return genaiQuestions.filter((q) => nums.includes(q.num))
-}
-
-export function getAieQuestion(num: number): Question | undefined {
-  return aieQuestions.find((q) => q.num === num)
-}
-
-export function getAieQuestions(nums?: number[]): Question[] {
-  if (!nums) return aieQuestions
-  return aieQuestions.filter((q) => nums.includes(q.num))
-}
+// Legacy aliases
+export const deQuestions = deV1495Questions
+export const genaiQuestions = genaiV1265Questions
+export const aieQuestionsKo = genaiV1295QuestionsKo
+export const aieQuestionsEn = genaiV1295QuestionsEn
+export const questions = deV1495Questions

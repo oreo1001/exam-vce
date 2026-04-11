@@ -27,7 +27,7 @@
     ],
     "explanation": "A. Upsize the worker nodes and activate autoshuffle partitions — (정답)\nWorker에서 Java heap OOM 발생 시 가장 올바른 해결책은 worker 노드 메모리를 증가시키는 것\nautoshuffle partitions(Adaptive Query Execution) 활성화는\n불필요하게 큰 shuffle 파티션 생성 → 메모리 압박을 줄여 OOM 완화에 도움됨\nB. Upsize the driver node and deactivate autoshuffle partitions — (정답)\nDriver 쪽에서 Java heap OOM이 발생했을 수도 있음 → driver 메모리 증가가 직접적인 해결책\nautoshuffle 비활성화 여부는 중요하지 않으며 핵심은 driver node upsize\nC. Cache the dataset\n캐시는 JVM heap 메모리를 더 사용함 → OOM을 악화시킴\nD. Fix shuffle partitions to 50\n파티션을 50으로 고정하면\n데이터가 매우 많을 경우 각 파티션의 데이터가 너무 커져서\nWorker 메모리에 한 번에 로드되는 데이터가 커져\n→ OOM을 더 자주 발생시킴\nAdaptive shuffle partitions가 훨씬 더 메모리 효율적",
     "question_images": [
-      "/images/de-images/q1_img0.jpeg"
+      "/images/de-v1495-images/q1_img0.jpeg"
     ],
     "explanation_images": []
   },
@@ -120,7 +120,7 @@
     ],
     "explanation": "A. trigger(\"5 seconds\")\n잘못된 문법. Spark에서는 문자열만 단독으로 받을 수 없음.\nB. trigger(continuous=\"5 seconds\")\nContinuous Processing 모드임.\nMicro-Batch가 아니라 1ms 수준의 지속 스트리밍 모드로 동작 → 요구사항과 다름.\nC. trigger(once=\"5 seconds\")\nOnce 트리거는 전체 데이터를 한 번만 처리하고 종료.\n\"5 seconds\" 값도 의미 없음.",
     "question_images": [
-      "/images/de-images/q4_img0.jpeg"
+      "/images/de-v1495-images/q4_img0.jpeg"
     ],
     "explanation_images": []
   },
@@ -238,8 +238,8 @@
     ],
     "explanation": "A region_sales = sales_df.groupBy(\"region\").agg(sum(\"sales_amount\").alias(\"total_sales_amount\"))\ngroupBy(\"region\") → 지역별 그룹핑\nagg(sum(\"sales_amount\").alias(\"total_sales_amount\")) → 그룹별 총합 계산\nSpark DataFrame 문법상 올바름\n요구 사항과 일치 → 정답\nB region_sales = sales_df.sum(\"sales_amount\").groupBy(\"region\").alias(\"total_sales_amount\")\nsum 후 groupBy → 문법 오류\nSpark에서는 groupBy 후 agg(sum(...)) 구조 사용\nC region_sales = sales_df.groupBy(\"category\").sum(\"sales_amount\").alias(\"total_sales_amount\")\n그룹핑 컬럼이 category → 문제에서는 region\n컬럼명이 다름 → 요구 사항 불일치\nD region_sales = sales_df.agg(sum(\"sales_amount\").groupBy(\"region\").alias(\"total_sales_amount\"))\n.agg() 안에서 groupBy 사용 → 문법 오류",
     "question_images": [
-      "/images/de-images/q8_img0.jpeg",
-      "/images/de-images/q8_img1.jpeg"
+      "/images/de-v1495-images/q8_img0.jpeg",
+      "/images/de-v1495-images/q8_img1.jpeg"
     ],
     "explanation_images": []
   },
@@ -609,8 +609,8 @@
     ],
     "explanation": "",
     "question_images": [
-      "/images/de-images/q20_img0.jpeg",
-      "/images/de-images/q20_img1.jpeg"
+      "/images/de-v1495-images/q20_img0.jpeg",
+      "/images/de-v1495-images/q20_img1.jpeg"
     ],
     "explanation_images": []
   },
@@ -990,22 +990,22 @@
       {
         "letter": "A",
         "text": "",
-        "image": "/images/de-images/q33_img0.jpeg"
+        "image": "/images/de-v1495-images/q33_img0.jpeg"
       },
       {
         "letter": "B",
         "text": "",
-        "image": "/images/de-images/q33_img1.jpeg"
+        "image": "/images/de-v1495-images/q33_img1.jpeg"
       },
       {
         "letter": "C",
         "text": "",
-        "image": "/images/de-images/q33_img2.jpeg"
+        "image": "/images/de-v1495-images/q33_img2.jpeg"
       },
       {
         "letter": "D",
         "text": "",
-        "image": "/images/de-images/q33_img3.jpeg"
+        "image": "/images/de-v1495-images/q33_img3.jpeg"
       }
     ],
     "correct": "D",
@@ -1366,27 +1366,27 @@
       {
         "letter": "A",
         "text": "",
-        "image": "/images/de-images/q45_img0.jpeg"
+        "image": "/images/de-v1495-images/q45_img0.jpeg"
       },
       {
         "letter": "B",
         "text": "",
-        "image": "/images/de-images/q45_img1.jpeg"
+        "image": "/images/de-v1495-images/q45_img1.jpeg"
       },
       {
         "letter": "C",
         "text": "",
-        "image": "/images/de-images/q45_img2.jpeg"
+        "image": "/images/de-v1495-images/q45_img2.jpeg"
       },
       {
         "letter": "D",
         "text": "",
-        "image": "/images/de-images/q45_img3.jpeg"
+        "image": "/images/de-v1495-images/q45_img3.jpeg"
       },
       {
         "letter": "E",
         "text": "",
-        "image": "/images/de-images/q45_img4.jpeg"
+        "image": "/images/de-v1495-images/q45_img4.jpeg"
       }
     ],
     "correct": "A",
@@ -1428,7 +1428,7 @@
     ],
     "explanation": "A: 잘못된 문법\nB: 트리거 주기 지정 없음\nC: once 트리거는 한 번만 실행\nD: ✔ 올바른 마이크로배치 트리거 설정\nE: continuous processing 모드 (micro-batch 아님)",
     "question_images": [
-      "/images/de-images/q46_img0.jpeg"
+      "/images/de-v1495-images/q46_img0.jpeg"
     ],
     "explanation_images": []
   },
@@ -1629,27 +1629,27 @@
       {
         "letter": "A",
         "text": "",
-        "image": "/images/de-images/q53_img0.jpeg"
+        "image": "/images/de-v1495-images/q53_img0.jpeg"
       },
       {
         "letter": "B",
         "text": "",
-        "image": "/images/de-images/q53_img1.jpeg"
+        "image": "/images/de-v1495-images/q53_img1.jpeg"
       },
       {
         "letter": "C",
         "text": "",
-        "image": "/images/de-images/q53_img2.jpeg"
+        "image": "/images/de-v1495-images/q53_img2.jpeg"
       },
       {
         "letter": "D",
         "text": "",
-        "image": "/images/de-images/q53_img3.jpeg"
+        "image": "/images/de-v1495-images/q53_img3.jpeg"
       },
       {
         "letter": "E",
         "text": "",
-        "image": "/images/de-images/q53_img4.jpeg"
+        "image": "/images/de-v1495-images/q53_img4.jpeg"
       }
     ],
     "correct": "D",
@@ -1716,7 +1716,7 @@
     ],
     "explanation": "category 컬럼으로 그룹화하고, sales_amount를 합산하여 total_sales_amount라는 이름으로 반환합니다.\nB.\nsum(\"sales_amount\")를 먼저 호출하고 groupBy를 사용하려고 했는데, PySpark에서는 groupBy 후 agg 안에서 집계함수\n를 사용하는 것이 맞습니다. ❌\nC.\nagg(...).groupBy(\"category\") 형태는 문법적으로 잘못되었습니다. ❌\nD.\nregion으로 그룹화하고 있으므로 카테고리별 집계 요구사항과 맞지 않습니다. ❌",
     "question_images": [
-      "/images/de-images/q55_img0.jpeg"
+      "/images/de-v1495-images/q55_img0.jpeg"
     ],
     "explanation_images": []
   },
@@ -1756,22 +1756,22 @@
       {
         "letter": "A",
         "text": "",
-        "image": "/images/de-images/q57_img0.jpeg"
+        "image": "/images/de-v1495-images/q57_img0.jpeg"
       },
       {
         "letter": "B",
         "text": "",
-        "image": "/images/de-images/q57_img1.jpeg"
+        "image": "/images/de-v1495-images/q57_img1.jpeg"
       },
       {
         "letter": "C",
         "text": "",
-        "image": "/images/de-images/q57_img2.jpeg"
+        "image": "/images/de-v1495-images/q57_img2.jpeg"
       },
       {
         "letter": "D",
         "text": "",
-        "image": "/images/de-images/q57_img3.jpeg"
+        "image": "/images/de-v1495-images/q57_img3.jpeg"
       }
     ],
     "correct": "C",
@@ -1979,22 +1979,22 @@
       {
         "letter": "A",
         "text": "",
-        "image": "/images/de-images/q64_img0.jpeg"
+        "image": "/images/de-v1495-images/q64_img0.jpeg"
       },
       {
         "letter": "B",
         "text": "",
-        "image": "/images/de-images/q64_img1.jpeg"
+        "image": "/images/de-v1495-images/q64_img1.jpeg"
       },
       {
         "letter": "C",
         "text": "",
-        "image": "/images/de-images/q64_img2.jpeg"
+        "image": "/images/de-v1495-images/q64_img2.jpeg"
       },
       {
         "letter": "D",
         "text": "",
-        "image": "/images/de-images/q64_img3.jpeg"
+        "image": "/images/de-v1495-images/q64_img3.jpeg"
       }
     ],
     "correct": "A",
@@ -2103,22 +2103,22 @@
       {
         "letter": "A",
         "text": "",
-        "image": "/images/de-images/q68_img0.jpeg"
+        "image": "/images/de-v1495-images/q68_img0.jpeg"
       },
       {
         "letter": "B",
         "text": "",
-        "image": "/images/de-images/q68_img1.jpeg"
+        "image": "/images/de-v1495-images/q68_img1.jpeg"
       },
       {
         "letter": "C",
         "text": "",
-        "image": "/images/de-images/q68_img2.jpeg"
+        "image": "/images/de-v1495-images/q68_img2.jpeg"
       },
       {
         "letter": "D",
         "text": "",
-        "image": "/images/de-images/q68_img3.jpeg"
+        "image": "/images/de-v1495-images/q68_img3.jpeg"
       }
     ],
     "correct": "D",
@@ -2421,27 +2421,27 @@
       {
         "letter": "A",
         "text": "",
-        "image": "/images/de-images/q78_img0.jpeg"
+        "image": "/images/de-v1495-images/q78_img0.jpeg"
       },
       {
         "letter": "B",
         "text": "",
-        "image": "/images/de-images/q78_img1.jpeg"
+        "image": "/images/de-v1495-images/q78_img1.jpeg"
       },
       {
         "letter": "C",
         "text": "",
-        "image": "/images/de-images/q78_img2.jpeg"
+        "image": "/images/de-v1495-images/q78_img2.jpeg"
       },
       {
         "letter": "D",
         "text": "",
-        "image": "/images/de-images/q78_img3.jpeg"
+        "image": "/images/de-v1495-images/q78_img3.jpeg"
       },
       {
         "letter": "E",
         "text": "",
-        "image": "/images/de-images/q78_img4.jpeg"
+        "image": "/images/de-v1495-images/q78_img4.jpeg"
       }
     ],
     "correct": "E",
@@ -2706,7 +2706,7 @@
     ],
     "explanation": "41번과 동일한 문제.",
     "question_images": [
-      "/images/de-images/q86_img0.jpeg"
+      "/images/de-v1495-images/q86_img0.jpeg"
     ],
     "explanation_images": []
   },
@@ -2774,7 +2774,7 @@
     ],
     "explanation": "A. None of these → 필요함, CSV 형식 지정 필요\nC. FROM CSV / E. FROM \"path/to/csv\" → SQL 구문에서 지원되지 않음\nD. USING DELTA → Delta 형식 생성 시 사용, CSV 입력 파일에는 적합하지 않음",
     "question_images": [
-      "/images/de-images/q88_img0.jpeg"
+      "/images/de-v1495-images/q88_img0.jpeg"
     ],
     "explanation_images": []
   },
@@ -3234,7 +3234,7 @@
     ],
     "explanation": "A → 예측 함수 변경은 스트리밍 읽기와 관련 없음\nB → maxFilesPerTrigger는 파일 소스 스트리밍에서만 의미 있음\nC → Delta 테이블 경로 지정은 필요 없고, 테이블 이름으로도 읽을 수 있음\nD → \"delta\" 포맷은 스트리밍과 호환 가능, format(\"stream\")은 존재하지 않음",
     "question_images": [
-      "/images/de-images/q102_img0.jpeg"
+      "/images/de-v1495-images/q102_img0.jpeg"
     ],
     "explanation_images": []
   },
@@ -3513,7 +3513,7 @@
     ],
     "explanation": "trigger(availableNow=True)는 Structured Streaming에서 현재 사용 가능한 모든 데이터를 한 번씩 처리하도록 설정하는\n옵션입니다.\n여러 배치로 나누어 처리하며, 새로 도착하는 데이터는 처리하지 않고, 현재까지 쌓인 데이터만 처리합니다.\n다른 옵션들은 다음과 같은 이유로 적합하지 않습니다:\nprocessingTime(1) → 반복 배치 처리 간격 지정\ntrigger(processingTime=\"once\") → 구문 오류, 올바른 옵션 아님\ncontinuous=\"once\" → 연속 스트리밍용, 단일 배치 처리 아님\nparallelBatch=True → 존재하지 않는 옵션",
     "question_images": [
-      "/images/de-images/q111_img0.jpeg"
+      "/images/de-v1495-images/q111_img0.jpeg"
     ],
     "explanation_images": []
   },
@@ -3710,22 +3710,22 @@
       {
         "letter": "A",
         "text": "",
-        "image": "/images/de-images/q118_img0.jpeg"
+        "image": "/images/de-v1495-images/q118_img0.jpeg"
       },
       {
         "letter": "B",
         "text": "",
-        "image": "/images/de-images/q118_img1.jpeg"
+        "image": "/images/de-v1495-images/q118_img1.jpeg"
       },
       {
         "letter": "C",
         "text": "",
-        "image": "/images/de-images/q118_img2.jpeg"
+        "image": "/images/de-v1495-images/q118_img2.jpeg"
       },
       {
         "letter": "D",
         "text": "",
-        "image": "/images/de-images/q118_img3.jpeg"
+        "image": "/images/de-v1495-images/q118_img3.jpeg"
       }
     ],
     "correct": "D",
@@ -4032,22 +4032,22 @@
       {
         "letter": "A",
         "text": "",
-        "image": "/images/de-images/q128_img0.jpeg"
+        "image": "/images/de-v1495-images/q128_img0.jpeg"
       },
       {
         "letter": "B",
         "text": "",
-        "image": "/images/de-images/q128_img1.jpeg"
+        "image": "/images/de-v1495-images/q128_img1.jpeg"
       },
       {
         "letter": "C",
         "text": "",
-        "image": "/images/de-images/q128_img2.jpeg"
+        "image": "/images/de-v1495-images/q128_img2.jpeg"
       },
       {
         "letter": "D",
         "text": "",
-        "image": "/images/de-images/q128_img3.jpeg"
+        "image": "/images/de-v1495-images/q128_img3.jpeg"
       }
     ],
     "correct": "B",
@@ -4185,7 +4185,7 @@
     ],
     "explanation": "Delta Lake에서는 시간여행(Time Travel) 기능을 사용하여 이전 버전의 테이블을 조회할 수 있습니다. 두 가지 주요 방법이 있\n습니다:\n버전 번호 사용:\nSELECT * FROM table_name VERSION AS OF <version_number>;\n예: SELECT * FROM students VERSION AS OF 5;\n단축 버전 표기:\nSELECT * FROM table_name@v<version_number>;\n예: SELECT * FROM students@v4;\n타임스탬프 사용:\nSELECT * FROM table_name TIMESTAMP AS OF '<timestamp>';\n이 경우 정확한 시간 값을 지정해야 하며, 업데이트 직전의 시간을 알아야 함",
     "question_images": [
-      "/images/de-images/q132_img0.jpeg"
+      "/images/de-v1495-images/q132_img0.jpeg"
     ],
     "explanation_images": []
   },
@@ -4229,27 +4229,27 @@
       {
         "letter": "A",
         "text": "",
-        "image": "/images/de-images/q134_img3.jpeg"
+        "image": "/images/de-v1495-images/q134_img3.jpeg"
       },
       {
         "letter": "B",
         "text": "",
-        "image": "/images/de-images/q134_img4.jpeg"
+        "image": "/images/de-v1495-images/q134_img4.jpeg"
       },
       {
         "letter": "C",
         "text": "",
-        "image": "/images/de-images/q134_img5.jpeg"
+        "image": "/images/de-v1495-images/q134_img5.jpeg"
       },
       {
         "letter": "D",
         "text": "",
-        "image": "/images/de-images/q134_img6.jpeg"
+        "image": "/images/de-v1495-images/q134_img6.jpeg"
       },
       {
         "letter": "E",
         "text": "",
-        "image": "/images/de-images/q134_img7.jpeg"
+        "image": "/images/de-v1495-images/q134_img7.jpeg"
       }
     ],
     "correct": "C",
@@ -4258,9 +4258,9 @@
     ],
     "explanation": "",
     "question_images": [
-      "/images/de-images/q134_img0.jpeg",
-      "/images/de-images/q134_img1.jpeg",
-      "/images/de-images/q134_img2.jpeg"
+      "/images/de-v1495-images/q134_img0.jpeg",
+      "/images/de-v1495-images/q134_img1.jpeg",
+      "/images/de-v1495-images/q134_img2.jpeg"
     ],
     "explanation_images": []
   },
@@ -4399,22 +4399,22 @@
       {
         "letter": "A",
         "text": "",
-        "image": "/images/de-images/q139_img0.jpeg"
+        "image": "/images/de-v1495-images/q139_img0.jpeg"
       },
       {
         "letter": "B",
         "text": "",
-        "image": "/images/de-images/q139_img1.jpeg"
+        "image": "/images/de-v1495-images/q139_img1.jpeg"
       },
       {
         "letter": "C",
         "text": "",
-        "image": "/images/de-images/q139_img2.jpeg"
+        "image": "/images/de-v1495-images/q139_img2.jpeg"
       },
       {
         "letter": "D",
         "text": "",
-        "image": "/images/de-images/q139_img3.jpeg"
+        "image": "/images/de-v1495-images/q139_img3.jpeg"
       }
     ],
     "correct": "A",
@@ -4456,7 +4456,7 @@
     ],
     "explanation": "",
     "question_images": [
-      "/images/de-images/q140_img0.jpeg"
+      "/images/de-v1495-images/q140_img0.jpeg"
     ],
     "explanation_images": []
   },
@@ -4487,7 +4487,7 @@
     ],
     "explanation": "The Databricks debugger enables the use of a variable explorer to see at a glance the value of the\nvariables. (Databricks 디버거는 변수 탐색기를 사용하여 변수 값을 한 눈에 볼 수 있도록 지원합니다.)\n이 기능은 데이터 엔지니어가 분석가가 제공한 입력의 실제 데이터 유형을 신속하게 식별하는 데 직접적인 도움을 줍니다.\nDatabricks 노트북 디버거에서 중단점(breakpoint)을 설정하고 변수 탐색기를 사용하면, 입력이 예를 들어 정수여야 할 때 문자\n열로 들어왔는지 등을 시각적으로 확인할 수 있습니다.\n다른 옵션이 덜 효과적이거나 틀린 이유는 다음과 같습니다.\nA. print 문을 추가하는 것은 수동적이고 반복적인 방법입니다.\n변수 탐색기는 런타임 중에 동적으로 검사할 수 있는 훨씬 더 효율적이고 시각적인 도구입니다.\nB. 중단점은 실행을 일시 중지하지만, 잘못된 데이터 유형이 제출될 경우 자동으로 오류를 발생시키지는 않습니다.\n엔지니어는 일시 중지된 상태를 검사하고(변수 탐색기와 같은 메커니즘을 사용하여) 유형 불일치를 수동으로 식별해야 합니다.\nC. Spark 사용자 인터페이스(UI)는 Spark 작업, 단계, 작업(기간, 처리된 데이터 등)에 대한 메트릭을 제공하지만, Databricks\n변수 탐색기처럼 세션 변수를 위한 \"디버그 탭\"은 포함하고 있지 않습니다.",
     "question_images": [
-      "/images/de-images/q141_img0.jpeg"
+      "/images/de-v1495-images/q141_img0.jpeg"
     ],
     "explanation_images": []
   },
@@ -4750,7 +4750,7 @@
     ],
     "explanation": "SELECT *,\nFILTER(employees, e -> e.experience > 5) AS exp_employees\nFROM stores;\n설명:\nemployees는 배열 타입 컬럼입니다.\nFILTER(array, lambda)를 사용하여 배열의 각 요소(e)에 대해 조건(e.experience > 5)을 적용합니다.\n조건을 만족하는 요소만 새 배열 exp_employees에 저장됩니다.",
     "question_images": [
-      "/images/de-images/q149_img0.jpeg"
+      "/images/de-v1495-images/q149_img0.jpeg"
     ],
     "explanation_images": []
   },
@@ -4785,7 +4785,7 @@
     ],
     "explanation": "Databricks의 COPY INTO 명령은 idempotent하며, 기본적으로 동일한 파일을 여러 번 복사하지 않습니다.\nCOPY INTO는 내부적으로 메타데이터를 추적하여 이미 처리된 파일은 건너뜁니다.\n따라서 오늘 복사 시 레코드 수가 변하지 않은 이유는 이미 이전에 동일한 파일이 transactions 테이블로 로드되었기 때문입니다.\n다른 선택지 분석:\nA → FORMAT_OPTIONS는 선택적이며, 파일을 복사하지 못한 이유가 아님\nB → 파일명을 명시하지 않아도 COPY INTO는 디렉토리 내 모든 파일을 대상으로 처리 가능\nD → PARQUET 형식은 COPY INTO에서 지원됨\nE → 테이블을 수동으로 새로고침하지 않아도 COPY INTO는 바로 데이터를 반영",
     "question_images": [
-      "/images/de-images/q150_img0.jpeg"
+      "/images/de-v1495-images/q150_img0.jpeg"
     ],
     "explanation_images": []
   },

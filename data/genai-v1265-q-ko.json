@@ -756,7 +756,7 @@
     ],
     "explanation": "일반적인 RAG 기반 고객 대면 챗봇이 사용자의 질문을 처리하는 방법을 이해하기 위해 옵션 A에 설명된 올바른 순서를\n살펴봅니다:\n* 임베딩 모델(1): 첫 번째 단계로 사용자의 질문이 임베딩 모델을 통해 처리됩니다. 이 모델은 텍스트를 수치적으로 표현하는\n벡터 형식으로 변환합니다. 이 단계는 후속 벡터 검색이 효과적으로 작동할 수 있도록 필수적입니다.\n* 벡터 검색(2): 임베딩 모델이 생성한 벡터를 사용하여 벡터 검색 메커니즘을 실행합니다. 이 검색은 데이터베이스에 벡터\n형식으로 저장된 가장 관련성 높은 문서나 이전에 답변된 질문을 식별합니다.\n* 컨텍스트 보강 프롬프트(3): 벡터 검색에서 검색된 정보를 사용하여 컨텍스트가 보강된 프롬프트를 생성합니다. 이 단계는\n생성된 응답이 가능한 한 정확하고 정보가 풍부하도록 추가 관련 정보로 기본 사용자 쿼리를 향상시키는 것을 포함합니다.\n* 응답 생성 LLM(4): 마지막으로 컨텍스트 보강 프롬프트를 응답 생성 대형 언어 모델(LLM)에 입력합니다. 이 LLM은\n프롬프트를 사용하여 일관성 있고 맥락에 맞는 답변을 생성하며, 이것이 사용자에게 최종 출력으로 전달됩니다.",
     "question_images": [
-      "/images/genai-images/q26_img0.jpeg"
+      "/images/genai-v1265-images/q26_img0.jpeg"
     ],
     "explanation_images": []
   },
@@ -1019,7 +1019,7 @@
     ],
     "explanation": "상황: 생성형 AI 엔지니어가 VectorSearchClient를 사용하여 벡터 스토어를 설정하고 있습니다. 이는 일반적으로 유사도\n검색 등의 작업을 위해 벡터화된 데이터를 빠르고 효율적으로 검색할 수 있도록 하는 데 수행됩니다.\n선택지 해설:\n* A. vsc.get_index(): 기존 인덱스를 검색하는 데 사용되므로, 엔드포인트 생성 직후 다음 단계로는 적합하지 않습니다.\n* B (정답). vsc.create_delta_sync_index(): 벡터 스토어 엔드포인트를 설정한 후 데이터를 채우고 구성하기 위해 인덱스를\n생성하는 것이 필요합니다. create_delta_sync_index() 함수는 Delta 테이블과 동기화되는 인덱스를 생성하여 데이터 변경\n시 자동 업데이트를 허용합니다. 이는 시간이 지남에 따라 업데이트되는 동적 데이터를 사용할 계획인 경우 가장 적합한\n선택입니다.\n* C. vsc.create_direct_access_index(): 동기화 없이 데이터에 직접 접근하는 인덱스를 생성하며, 기본 설정에서는 덜\n적합합니다.\n* D. vsc.similarity_search(): 기존 인덱스에서 검색을 수행하는 데 사용되지만, 검색 전에 인덱스를 먼저 생성하고 데이터를\n채워야 합니다.\n벡터 스토어 설정의 일반적인 워크플로우에 따라, 엔드포인트 생성 후 다음 단계는 인덱스를 설정하는 것이며, 특히 지속적인\n데이터 업데이트를 수용하는 것이므로 옵션 B입니다.",
     "question_images": [
-      "/images/genai-images/q35_img0.jpeg"
+      "/images/genai-v1265-images/q35_img0.jpeg"
     ],
     "explanation_images": []
   },
@@ -1359,22 +1359,22 @@
       {
         "letter": "A",
         "text": "",
-        "image": "/images/genai-images/q47_choice_a.jpeg"
+        "image": "/images/genai-v1265-images/q47_choice_a.jpeg"
       },
       {
         "letter": "B",
         "text": "",
-        "image": "/images/genai-images/q47_choice_b.jpeg"
+        "image": "/images/genai-v1265-images/q47_choice_b.jpeg"
       },
       {
         "letter": "C",
         "text": "",
-        "image": "/images/genai-images/q47_choice_c.jpeg"
+        "image": "/images/genai-v1265-images/q47_choice_c.jpeg"
       },
       {
         "letter": "D",
         "text": "",
-        "image": "/images/genai-images/q47_choice_d.jpeg"
+        "image": "/images/genai-v1265-images/q47_choice_d.jpeg"
       }
     ],
     "correct": "C",
@@ -1383,7 +1383,7 @@
     ],
     "explanation": "LangChain 코드의 오류를 수정하는 올바른 접근 방식인 옵션 C에 대한 자세한 분석:\n* 올바른 초기화: 옵션 C에서 LLMChain이 LLM 인스턴스를 OpenAI()로 올바르게 초기화합니다. 이는 응답 생성에 사용할\n모델을 지정하는 데 필수적입니다.\n* 클래스와 메서드의 올바른 사용:\n* PromptTemplate은 adjective가 템플릿 내 변수임을 지정하는 올바른 형식으로 정의됩니다.\n* prompt 변수는 PromptTemplate과 올바르게 연결됩니다.\n* LLMChain은 prompt와 초기화된 OpenAI() 인스턴스를 올바르게 참조합니다.\n나머지 선택지가 올바르지 않은 이유:\n* A: generate 메서드에서 딕셔너리 구조를 잘못 구성합니다.\n* B: LLMChain과 PromptTemplate 맥락에서 존재하지 않는 prompt.format 메서드를 잘못 사용합니다.\n* D: LLMChain의 초기화 파라미터 순서와 설정이 잘못되어 있습니다.\n따라서 옵션 C가 올바른 이유는 LangChain 구성 요소들이 올바르게 설정되고 통합되어 있기 때문입니다.",
     "question_images": [
-      "/images/genai-images/q47_img0.jpeg"
+      "/images/genai-v1265-images/q47_img0.jpeg"
     ],
     "explanation_images": []
   },
@@ -1414,7 +1414,7 @@
     ],
     "explanation": "문제 상황: 이메일을 파싱하여 특정 정보를 추출하고 구조화된 JSON 형식으로 출력하는 것이 목표입니다. 프롬프트 설계의\n명확성과 구체성이 LLM 응답의 정확도를 높입니다.\n선택지 해설:\n* A: 일반적인 지침을 제공하지만 LLM이 정확한 형식을 이해하는 데 도움이 되는 예제가 없습니다.\n* B (정답): 명확한 지시와 출력 형식의 구체적인 예제를 포함합니다. 예제를 제공하는 것은 정보가 구성되어야 하는 패턴과\n형식을 설정하는 데 중요하여 더 정확한 결과를 이끌어 냅니다.\n* C: 출력이 JSON 형식이어야 한다고 지정하지 않아 요구사항을 충족하지 못합니다.\n* D: JSON 형식을 올바르게 요청하지만 JSON을 올바르게 구성하는 방법을 안내하는 예제가 없습니다.\n따라서 옵션 B가 최적으로, 요구되는 형식을 지정할 뿐만 아니라 예제로 보여주어 LLM이 정확하게 추출하고 형식화할\n가능성을 높입니다.",
     "question_images": [
-      "/images/genai-images/q48_img0.jpeg"
+      "/images/genai-v1265-images/q48_img0.jpeg"
     ],
     "explanation_images": []
   },

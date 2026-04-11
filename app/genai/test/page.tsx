@@ -1,13 +1,13 @@
 'use client'
 
 import TestClient from '@/components/TestClient'
-import { genaiQuestions } from '@/lib/questions'
+import { genaiV1265Questions } from '@/lib/questions'
 import { genaiStorage } from '@/lib/storage'
 
 export default function GenAITestPage() {
   return (
     <TestClient
-      questions={genaiQuestions}
+      questions={genaiV1265Questions}
       storage={genaiStorage}
       homeHref="/genai"
       resultsHref="/genai/results"

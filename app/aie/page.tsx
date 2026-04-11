@@ -3,16 +3,24 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { aieStorage } from '@/lib/storage'
+import { getAieLang, setAieLang, type AieLang } from '@/lib/aie-lang'
 
 export default function AIEHomePage() {
   const [stats, setStats] = useState({ answered: 0, correct: 0, total: 75 })
   const [wrongCount, setWrongCount] = useState(0)
   const [showResetConfirm, setShowResetConfirm] = useState(false)
+  const [lang, setLang] = useState<AieLang>('ko')
 
   useEffect(() => {
+    setLang(getAieLang())
     setStats(aieStorage.getStudyStats(75))
     setWrongCount(aieStorage.getWrongQuestions().length)
   }, [])
+
+  const handleLangChange = (newLang: AieLang) => {
+    setAieLang(newLang)
+    setLang(newLang)
+  }
 
   const pct = stats.answered > 0 ? Math.round((stats.correct / stats.answered) * 100) : 0
 
@@ -40,7 +48,21 @@ export default function AIEHomePage() {
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">
             Databricks AI Engineer Associate
           </h1>
-          <p className="text-gray-500 dark:text-gray-400 text-lg">문제집 · 75문제 (English)</p>
+          <p className="text-gray-500 dark:text-gray-400 text-lg">문제집 · 75문제 · v12.95</p>
+          <div className="mt-3 inline-flex items-center bg-gray-100 dark:bg-gray-800 rounded-xl p-1 gap-1">
+            <button
+              onClick={() => handleLangChange('ko')}
+              className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${lang === 'ko' ? 'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'}`}
+            >
+              🇰🇷 한국어
+            </button>
+            <button
+              onClick={() => handleLangChange('en')}
+              className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${lang === 'en' ? 'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'}`}
+            >
+              🇺🇸 English
+            </button>
+          </div>
         </div>
 
         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 mb-8 shadow-sm">
