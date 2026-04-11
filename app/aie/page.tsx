@@ -7,6 +7,7 @@ import { aieStorage } from '@/lib/storage'
 export default function AIEHomePage() {
   const [stats, setStats] = useState({ answered: 0, correct: 0, total: 75 })
   const [wrongCount, setWrongCount] = useState(0)
+  const [showResetConfirm, setShowResetConfirm] = useState(false)
 
   useEffect(() => {
     setStats(aieStorage.getStudyStats(75))
@@ -14,6 +15,14 @@ export default function AIEHomePage() {
   }, [])
 
   const pct = stats.answered > 0 ? Math.round((stats.correct / stats.answered) * 100) : 0
+
+  const handleReset = () => {
+    aieStorage.clearStudyAnswers()
+    aieStorage.clearWrongQuestions()
+    setStats({ answered: 0, correct: 0, total: 75 })
+    setWrongCount(0)
+    setShowResetConfirm(false)
+  }
 
   return (
     <div className="min-h-full bg-gray-50 dark:bg-gray-950 py-12 px-4">
@@ -35,7 +44,18 @@ export default function AIEHomePage() {
         </div>
 
         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 mb-8 shadow-sm">
-          <h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-4">학습 현황</h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">학습 현황</h2>
+            <button
+              onClick={() => setShowResetConfirm(true)}
+              className="text-xs text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors flex items-center gap-1"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              초기화
+            </button>
+          </div>
           <div className="grid grid-cols-3 gap-4 text-center mb-4">
             <div>
               <div className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -125,6 +145,40 @@ export default function AIEHomePage() {
           </Link>
         )}
       </div>
+
+      {/* Reset confirmation modal */}
+      {showResetConfirm && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 max-w-sm w-full shadow-xl border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-950 flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white">학습 현황 초기화</h3>
+            </div>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+              정말 초기화 하시겠습니까?<br />
+              학습한 모든 기록이 날라갑니다.
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowResetConfirm(false)}
+                className="flex-1 px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-sm font-medium"
+              >
+                취소
+              </button>
+              <button
+                onClick={handleReset}
+                className="flex-1 px-4 py-2.5 rounded-xl bg-red-500 text-white hover:bg-red-600 transition-colors text-sm font-medium"
+              >
+                초기화
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

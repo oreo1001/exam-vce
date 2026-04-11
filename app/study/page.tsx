@@ -19,6 +19,15 @@ export default function StudyPage() {
   const question = questions[currentIndex]
   const isMultiple = question.correct_list.length > 1
 
+  // Refs for auto-save on navigation
+  const selectedRef = useRef(selected)
+  const checkedRef = useRef(checked)
+  const questionRef = useRef(question)
+
+  useEffect(() => { selectedRef.current = selected }, [selected])
+  useEffect(() => { checkedRef.current = checked }, [checked])
+  useEffect(() => { questionRef.current = question }, [question])
+
   useEffect(() => {
     const saved = getStudyAnswers()
     setAnswers(saved)
@@ -61,7 +70,6 @@ export default function StudyPage() {
     setChecked(true)
     setStudyAnswer(question.num, answer)
     setAnswers((prev) => ({ ...prev, [question.num]: answer }))
-    // 오답노트 자동 갱신
     if (isCorrect) {
       removeWrongQuestion(question.num)
     } else {
@@ -70,8 +78,21 @@ export default function StudyPage() {
     setWrongCount(getWrongQuestions().length)
   }, [selected, question])
 
+  // Auto-save selection when navigating away without pressing check
   const goTo = useCallback(
     (index: number) => {
+      const sel = selectedRef.current
+      const isChecked = checkedRef.current
+      const q = questionRef.current
+      if (sel.length > 0 && !isChecked) {
+        const isCorrect = [...sel].sort().join('') === [...q.correct_list].sort().join('')
+        const answer = { selected: sel, correct: isCorrect }
+        setStudyAnswer(q.num, answer)
+        setAnswers((prev) => ({ ...prev, [q.num]: answer }))
+        if (isCorrect) removeWrongQuestion(q.num)
+        else addWrongQuestion(q.num)
+        setWrongCount(getWrongQuestions().length)
+      }
       const idx = Math.max(0, Math.min(questions.length - 1, index))
       setCurrentIndex(idx)
     },
@@ -122,28 +143,22 @@ export default function StudyPage() {
     correct: Object.values(answers).filter((a) => a.correct).length,
   }
 
+  const isLastQuestion = currentIndex === questions.length - 1
+
   return (
     <div className="min-h-full bg-gray-50 dark:bg-gray-950 pb-12">
       {/* Top bar */}
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-4 py-3">
         <div className="max-w-3xl mx-auto flex items-center justify-between gap-4 flex-wrap">
           <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
+            <Link href="/de" className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+              ← 홈
+            </Link>
             <span>
               <span className="font-semibold text-gray-900 dark:text-white">{stats.answered}</span>
               /{questions.length} 풀이
             </span>
             <span className="text-green-600 dark:text-green-400 font-semibold">{stats.correct} 정답</span>
-            {/* {wrongCount > 0 && (
-              <Link
-                href="/wrong"
-                className="flex items-center gap-1 text-red-500 hover:text-red-400 font-semibold transition-colors"
-              >
-                <span className="inline-flex items-center justify-center w-5 h-5 bg-red-500 text-white text-xs rounded-full">
-                  {wrongCount}
-                </span>
-                오답노트
-              </Link>
-            )} */}
           </div>
           <div className="flex items-center gap-2">
             <form onSubmit={handleJump} className="flex items-center gap-1">
@@ -236,16 +251,27 @@ export default function StudyPage() {
             {currentIndex + 1} / {questions.length}
           </span>
 
-          <button
-            onClick={handleNext}
-            disabled={currentIndex === questions.length - 1}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-          >
-            다음
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+          {isLastQuestion ? (
+            <Link
+              href="/de"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#ff3621] text-white hover:bg-[#cc2b1a] transition-colors font-medium"
+            >
+              학습 완료
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </Link>
+          ) : (
+            <button
+              onClick={handleNext}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            >
+              다음
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          )}
         </div>
 
         <p className="text-xs text-gray-400 dark:text-gray-600 text-center mt-3">

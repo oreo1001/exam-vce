@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import QuestionCard from '@/components/QuestionCard'
 import { Question } from '@/lib/questions'
@@ -26,6 +26,15 @@ export default function StudyClient({ questions, storage, homeHref, testHref, wr
 
   const question = questions[currentIndex]
   const isMultiple = question.correct_list.length > 1
+
+  // Refs to access current state inside goTo without stale closures
+  const selectedRef = useRef(selected)
+  const checkedRef = useRef(checked)
+  const questionRef = useRef(question)
+
+  useEffect(() => { selectedRef.current = selected }, [selected])
+  useEffect(() => { checkedRef.current = checked }, [checked])
+  useEffect(() => { questionRef.current = question }, [question])
 
   useEffect(() => {
     setAnswers(storage.getStudyAnswers())
@@ -74,11 +83,24 @@ export default function StudyClient({ questions, storage, homeHref, testHref, wr
     setWrongCount(storage.getWrongQuestions().length)
   }, [selected, question, storage])
 
+  // Auto-save selection when navigating away without pressing check
   const goTo = useCallback(
     (index: number) => {
+      const sel = selectedRef.current
+      const isChecked = checkedRef.current
+      const q = questionRef.current
+      if (sel.length > 0 && !isChecked) {
+        const isCorrect = [...sel].sort().join('') === [...q.correct_list].sort().join('')
+        const answer = { selected: sel, correct: isCorrect }
+        storage.setStudyAnswer(q.num, answer)
+        setAnswers((prev) => ({ ...prev, [q.num]: answer }))
+        if (isCorrect) storage.removeWrongQuestion(q.num)
+        else storage.addWrongQuestion(q.num)
+        setWrongCount(storage.getWrongQuestions().length)
+      }
       setCurrentIndex(Math.max(0, Math.min(questions.length - 1, index)))
     },
-    [questions.length]
+    [questions.length, storage]
   )
 
   const handlePrev = useCallback(() => goTo(currentIndex - 1), [currentIndex, goTo])
@@ -121,6 +143,8 @@ export default function StudyClient({ questions, storage, homeHref, testHref, wr
     answered: Object.keys(answers).length,
     correct: Object.values(answers).filter((a) => a.correct).length,
   }
+
+  const isLastQuestion = currentIndex === questions.length - 1
 
   return (
     <div className="min-h-full bg-gray-50 dark:bg-gray-950 pb-12">
@@ -220,16 +244,27 @@ export default function StudyClient({ questions, storage, homeHref, testHref, wr
           <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
             {currentIndex + 1} / {questions.length}
           </span>
-          <button
-            onClick={handleNext}
-            disabled={currentIndex === questions.length - 1}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-          >
-            다음
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+          {isLastQuestion ? (
+            <Link
+              href={homeHref}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#ff3621] text-white hover:bg-[#cc2b1a] transition-colors font-medium"
+            >
+              학습 완료
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </Link>
+          ) : (
+            <button
+              onClick={handleNext}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            >
+              다음
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          )}
         </div>
 
         <p className="text-xs text-gray-400 dark:text-gray-600 text-center mt-3">

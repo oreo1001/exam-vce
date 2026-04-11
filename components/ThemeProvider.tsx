@@ -42,18 +42,30 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
   useEffect(() => {
     const supabase = createClient()
 
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(({ data: { session }, error }) => {
+      if (error) {
+        // 만료되거나 유효하지 않은 refresh token → 조용히 로그아웃 처리
+        supabase.auth.signOut()
+        return
+      }
       const u = session?.user ?? null
       setUser(u)
       setCurrentUserId(u?.id ?? null)
       if (u) syncDbToLocal(u.id)
     })
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      const u = session?.user ?? null
-      setUser(u)
-      setCurrentUserId(u?.id ?? null)
-      if (u) syncDbToLocal(u.id)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED') {
+        const u = session?.user ?? null
+        setUser(u)
+        setCurrentUserId(u?.id ?? null)
+        if (u) syncDbToLocal(u.id)
+      } else if (event === 'SIGNED_IN') {
+        const u = session?.user ?? null
+        setUser(u)
+        setCurrentUserId(u?.id ?? null)
+        if (u) syncDbToLocal(u.id)
+      }
     })
 
     return () => subscription.unsubscribe()
