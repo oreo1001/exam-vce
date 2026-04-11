@@ -3,6 +3,7 @@ import deV1565Data from '@/data/de-v1565-q-ko.json'
 import genaiV1265Data from '@/data/genai-v1265-q-ko.json'
 import genaiV1295DataKo from '@/data/genai-v1295-q-ko.json'
 import genaiV1295DataEn from '@/data/genai-v1295-q-en.json'
+import depV1265Data from '@/data/dep-v1265-q-en.json'
 
 export interface Question {
   num: number
@@ -20,6 +21,7 @@ export const deV1565Questions: Question[] = deV1565Data as Question[]
 export const genaiV1265Questions: Question[] = genaiV1265Data as Question[]
 export const genaiV1295QuestionsKo: Question[] = genaiV1295DataKo as Question[]
 export const genaiV1295QuestionsEn: Question[] = genaiV1295DataEn as Question[]
+export const depV1265Questions: Question[] = depV1265Data as Question[]
 
 // Legacy aliases
 export const deQuestions = deV1495Questions
