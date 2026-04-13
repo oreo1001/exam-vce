@@ -1941,11 +1941,11 @@
         "image": "/images/genai-v1295-images/q68_choice_d.jpeg"
       }
     ],
-    "correct": "C",
+    "correct": "D",
     "correct_list": [
-      "C"
+      "D"
     ],
-    "explanation": "LangChain 코드의 오류를 수정하기 위한 올바른 접근 방식은 옵션 C입니다.\n\n올바른 초기화: 옵션 C에서 LLMChain은 OpenAI()로 지정된 LLM 인스턴스와 함께 올바르게 초기화됩니다.\n\n클래스 및 메서드의 올바른 사용:\n- PromptTemplate은 템플릿 내 변수로 adjective를 지정하는 올바른 형식으로 정의됩니다.\n- prompt 변수는 PromptTemplate과 올바르게 연결됩니다.\n- LLMChain은 prompt와 초기화된 OpenAI() 인스턴스를 올바르게 참조합니다.\n\n다른 옵션이 잘못된 이유:\n- 옵션 A: generate 메서드에서 딕셔너리 구조를 잘못 사용합니다.\n- 옵션 B: LLMChain 및 PromptTemplate 구성의 맥락에서 존재하지 않는 prompt.format 메서드를 잘못 사용합니다.\n- 옵션 D: LLMChain의 초기화 파라미터 순서와 설정이 잘못되어 있습니다.\n\n따라서 옵션 C는 LangChain 구성 요소가 올바르게 설정되고 통합되어 있으며, LangChain 아키텍처에 필요한 적절한 구문과 논리적 흐름을 준수하므로 정답입니다.",
+    "explanation": "원본 코드는 LLMChain을 만들 때 llm 객체(모델)를 넣지 않았습니다. \n\n옵션 D처럼 llm=OpenAI()를 추가해야 모델과 프롬프트가 연결되어 정상 작동합니다. \n\n나머지 옵션은 문법이 틀렸거나 불필요한 과정을 포함하고 있습니다.",
     "question_images": [
       "/images/genai-v1295-images/q68_img0.jpeg"
     ]
