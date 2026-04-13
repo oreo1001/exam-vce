@@ -37,6 +37,7 @@ export default function SubjectSelectPage() {
                 <span className="text-xs bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 px-2 py-0.5 rounded-full">228문제</span>
                 <span className="text-xs bg-red-50 dark:bg-red-950 text-red-500 dark:text-red-400 px-2 py-0.5 rounded-full font-mono">v15.65</span>
                 <span className="text-xs bg-blue-50 dark:bg-blue-950 text-blue-500 dark:text-blue-400 px-2 py-0.5 rounded-full">한국어</span>
+                <span className="text-xs bg-green-50 dark:bg-green-950 text-green-600 dark:text-green-400 px-2 py-0.5 rounded-full">English</span>
               </div>
             </div>
           </Link>

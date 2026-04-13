@@ -284,11 +284,18 @@
       },
       {
         "letter": "C",
-        "text": ""
+        "text": "",
+        "image": "/images/dep-v1265-images/q9_choice_c.jpeg"
       },
       {
         "letter": "D",
-        "text": "E."
+        "text": "",
+        "image": "/images/dep-v1265-images/q9_choice_d.jpeg"
+      },
+      {
+        "letter": "E",
+        "text": "",
+        "image": "/images/dep-v1265-images/q9_choice_e.jpeg"
       }
     ],
     "correct": "A",
@@ -319,24 +326,20 @@
       },
       {
         "letter": "D",
-        "text": "Each write to the orders table will only contain unique records; if existing records with the same key are present in the target table, the operation will tail.",
-        "image": "/images/dep-v1265-images/q10_choice_d.jpeg"
+        "text": "Each write to the orders table will only contain unique records; if existing records with the same key are present in the target table, the operation will fail."
       },
       {
         "letter": "E",
-        "text": "Each write to the orders table will run deduplication over the union of new and existing records, ensuring no duplicate records are present.",
-        "image": "/images/dep-v1265-images/q10_choice_e.jpeg"
+        "text": "Each write to the orders table will run deduplication over the union of new and existing records, ensuring no duplicate records are present."
       }
     ],
-    "correct": "BE",
+    "correct": "B",
     "correct_list": [
-      "B",
-      "E"
+      "B"
     ],
     "explanation": "This is the correct answer because the code uses the dropDuplicates method to remove any duplicate records within each batch of data before writing to the orders table. However, this method does not check for duplicates across different batches or in the target table, so it is possible that newly written records may have duplicates already present in the target table. To avoid this, a better approach would be to use Delta Lake and perform an upsert operation using mergeInto.",
     "question_images": [
-      "/images/dep-v1265-images/q10_img0.jpeg",
-      "/images/dep-v1265-images/q10_img1.jpeg"
+      "/images/dep-v1265-images/q10_img0.jpeg"
     ],
     "explanation_images": []
   },
@@ -1074,16 +1077,21 @@
       },
       {
         "letter": "C",
-        "text": "22"
+        "text": "",
+        "image": "/images/dep-v1265-images/q32_choice_c.jpeg"
       },
       {
         "letter": "D",
-        "text": "return spark.read.option(\"readChangeFeed\", \"true\").table (\"bronze\") E."
+        "text": "return spark.read.option(\"readChangeFeed\", \"true\").table(\"bronze\")"
+      },
+      {
+        "letter": "E",
+        "text": "",
+        "image": "/images/dep-v1265-images/q32_choice_e.jpeg"
       }
     ],
-    "correct": "EE",
+    "correct": "E",
     "correct_list": [
-      "E",
       "E"
     ],
     "explanation": "https://docs.databricks.com/en/delta/delta-change-data-feed.html",
@@ -2585,7 +2593,8 @@
     "choices": [
       {
         "letter": "A",
-        "text": ""
+        "text": "",
+        "image": "/images/dep-v1265-images/q76_choice_a.jpeg"
       },
       {
         "letter": "B",
@@ -2594,16 +2603,22 @@
       },
       {
         "letter": "C",
-        "text": "51"
+        "text": "",
+        "image": "/images/dep-v1265-images/q76_choice_c.jpeg"
       },
       {
         "letter": "D",
-        "text": "E."
+        "text": "",
+        "image": "/images/dep-v1265-images/q76_choice_d.jpeg"
+      },
+      {
+        "letter": "E",
+        "text": "",
+        "image": "/images/dep-v1265-images/q76_choice_e.jpeg"
       }
     ],
-    "correct": "EE",
+    "correct": "E",
     "correct_list": [
-      "E",
       "E"
     ],
     "explanation": "https://docs.databricks.com/en/ingestion/auto-loader/schema.html",
@@ -2630,13 +2645,11 @@
       },
       {
         "letter": "D",
-        "text": "libraries",
-        "image": "/images/dep-v1265-images/q77_choice_d.jpeg"
+        "text": "libraries"
       },
       {
         "letter": "E",
-        "text": "workspace",
-        "image": "/images/dep-v1265-images/q77_choice_e.jpeg"
+        "text": "workspace"
       }
     ],
     "correct": "BE",
@@ -2645,9 +2658,7 @@
       "E"
     ],
     "explanation": "https://docs.databricks.com/en/archive/dev-tools/cli/dbfs-cli.html",
-    "question_images": [
-      "/images/dep-v1265-images/q77_img0.jpeg"
-    ],
+    "question_images": [],
     "explanation_images": []
   },
   {
@@ -3900,7 +3911,8 @@
     "choices": [
       {
         "letter": "A",
-        "text": ""
+        "text": "",
+        "image": "/images/dep-v1265-images/q116_choice_a.jpeg"
       },
       {
         "letter": "B",
@@ -3914,13 +3926,13 @@
       },
       {
         "letter": "D",
-        "text": "75"
+        "text": "",
+        "image": "/images/dep-v1265-images/q116_choice_d.jpeg"
       }
     ],
-    "correct": "AE",
+    "correct": "A",
     "correct_list": [
-      "A",
-      "E"
+      "A"
     ],
     "explanation": "When joining a stream of advertisement impressions with a stream of user clicks, you want to minimize the state that you need to maintain for the join. Option A suggests using a left outer join with the condition that clickTime == impressionTime, which is suitable for correlating events that occur at the exact same time. However, in a real-world scenario, you would likely need some leeway to account for the delay between an impression and a possible click. It's important to design the join condition and the window of time considered to optimize performance while still capturing the relevant user interactions. In this case, having the watermark can help with state management and avoid state growing unbounded by discarding old state data that's unlikely to match with new data.",
     "question_images": [
@@ -4793,7 +4805,8 @@
     "choices": [
       {
         "letter": "A",
-        "text": ""
+        "text": "",
+        "image": "/images/dep-v1265-images/q144_img0.jpeg"
       },
       {
         "letter": "B",
@@ -4804,17 +4817,19 @@
         "letter": "C",
         "text": "",
         "image": "/images/dep-v1265-images/q144_choice_c.jpeg"
+      },
+      {
+        "letter": "D",
+        "text": "",
+        "image": "/images/dep-v1265-images/q144_choice_d.jpeg"
       }
     ],
-    "correct": "CE",
+    "correct": "C",
     "correct_list": [
-      "C",
-      "E"
+      "C"
     ],
     "explanation": "Using DataFrame.transform with a pure transformation function promotes modular, reusable, and easily testable ETL logic. Each transformation is encapsulated as a standalone function, 93 can be independently unit tested, and composed cleanly in a pipeline without coupling to orchestration or class state.",
-    "question_images": [
-      "/images/dep-v1265-images/q144_img0.jpeg"
-    ],
+    "question_images": [],
     "explanation_images": []
   },
   {
@@ -4853,27 +4868,31 @@
     "choices": [
       {
         "letter": "A",
-        "text": ""
+        "text": "",
+        "image": "/images/dep-v1265-images/q146_img0.jpeg"
       },
       {
         "letter": "B",
-        "text": "94"
+        "text": "",
+        "image": "/images/dep-v1265-images/q146_img1.jpeg"
+      },
+      {
+        "letter": "C",
+        "text": "",
+        "image": "/images/dep-v1265-images/q146_choice_c.jpeg"
       },
       {
         "letter": "D",
-        "text": "95"
+        "text": "",
+        "image": "/images/dep-v1265-images/q146_choice_d.jpeg"
       }
     ],
-    "correct": "AE",
+    "correct": "A",
     "correct_list": [
-      "A",
-      "E"
+      "A"
     ],
     "explanation": "This configuration correctly references the service principal created for the Databricks App using the deployed app resource identifier, and it grants the required READ and WRITE privileges at the Volume level. The privileges are specified using the correct Volume-specific permissions, ensuring the Databricks App can securely access the Volume after deployment.",
-    "question_images": [
-      "/images/dep-v1265-images/q146_img0.jpeg",
-      "/images/dep-v1265-images/q146_img1.jpeg"
-    ],
+    "question_images": [],
     "explanation_images": []
   },
   {
@@ -4882,14 +4901,21 @@
     "choices": [
       {
         "letter": "A",
-        "text": ""
+        "text": "",
+        "image": "/images/dep-v1265-images/q147_img0.jpeg"
       },
       {
         "letter": "B",
-        "text": "96"
+        "text": "",
+        "image": "/images/dep-v1265-images/q147_img1.jpeg"
       },
       {
         "letter": "C",
+        "text": "",
+        "image": "/images/dep-v1265-images/q147_img2.jpeg"
+      },
+      {
+        "letter": "D",
         "text": "",
         "image": "/images/dep-v1265-images/q147_choice_c.jpeg"
       }
@@ -4899,11 +4925,7 @@
       "C"
     ],
     "explanation": "This query correctly aggregates usage at a daily granularity by truncating the usage start timestamp to the day and summing the usage quantity, which represents DBUs. Grouping by both the derived daily value and the SKU name ensures usage is accurately categorized by product tier across all workspaces.",
-    "question_images": [
-      "/images/dep-v1265-images/q147_img0.jpeg",
-      "/images/dep-v1265-images/q147_img1.jpeg",
-      "/images/dep-v1265-images/q147_img2.jpeg"
-    ],
+    "question_images": [],
     "explanation_images": []
   },
   {
@@ -4942,22 +4964,31 @@
     "choices": [
       {
         "letter": "A",
-        "text": "98"
+        "text": "",
+        "image": "/images/dep-v1265-images/q149_img0.jpeg"
+      },
+      {
+        "letter": "B",
+        "text": "",
+        "image": "/images/dep-v1265-images/q149_choice_b.jpeg"
+      },
+      {
+        "letter": "C",
+        "text": "",
+        "image": "/images/dep-v1265-images/q149_choice_c.jpeg"
       },
       {
         "letter": "D",
-        "text": "99"
+        "text": "",
+        "image": "/images/dep-v1265-images/q149_choice_d.jpeg"
       }
     ],
-    "correct": "DE",
+    "correct": "D",
     "correct_list": [
-      "D",
-      "E"
+      "D"
     ],
     "explanation": "This approach first aggregates sales by salesperson and region to compute total cumulative sales. It then applies a window function partitioned by region and ordered by total sales in descending order, using dense_rank to assign ranks so that salespeople with equal totals share the same rank and the highest total receives rank 1.",
-    "question_images": [
-      "/images/dep-v1265-images/q149_img0.jpeg"
-    ],
+    "question_images": [],
     "explanation_images": []
   },
   {
@@ -5421,7 +5452,8 @@
     "choices": [
       {
         "letter": "A",
-        "text": ""
+        "text": "",
+        "image": "/images/dep-v1265-images/q165_img0.jpeg"
       },
       {
         "letter": "B",
@@ -5435,18 +5467,16 @@
       },
       {
         "letter": "D",
-        "text": "108"
+        "text": "",
+        "image": "/images/dep-v1265-images/q165_choice_d.jpeg"
       }
     ],
-    "correct": "CE",
+    "correct": "C",
     "correct_list": [
-      "C",
-      "E"
+      "C"
     ],
     "explanation": "This window specification partitions the data by customer_id, orders transactions by transaction_timestamp, and defines the frame from the first transaction through the current one. This guarantees that the cumulative sum is computed independently per customer and strictly follows the temporal order, including all prior transactions up to the current row.",
-    "question_images": [
-      "/images/dep-v1265-images/q165_img0.jpeg"
-    ],
+    "question_images": [],
     "explanation_images": []
   },
   {
