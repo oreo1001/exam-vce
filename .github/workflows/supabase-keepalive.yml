@@ -1,0 +1,37 @@
+name: Supabase Keep-Alive
+
+# Free Plan 프로젝트는 7일간 요청이 없으면 자동 일시정지된다.
+# 주 2회 REST 쿼리를 날려 활동 기록을 남겨 pause 를 막는다.
+on:
+  schedule:
+    - cron: '0 3 * * 1,4' # 매주 월·목 03:00 UTC (KST 12:00)
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase REST
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_ANON_KEY" ]; then
+            echo "::error::SUPABASE_URL / SUPABASE_ANON_KEY 시크릿이 설정되지 않았습니다."
+            exit 1
+          fi
+
+          # RLS 때문에 결과는 항상 빈 배열이지만, 요청은 Postgres 까지 도달한다.
+          code=$(curl -sS -o /tmp/body -w '%{http_code}' \
+            --max-time 30 --retry 3 --retry-delay 15 --retry-all-errors \
+            "$SUPABASE_URL/rest/v1/study_answers?select=id&limit=1" \
+            -H "apikey: $SUPABASE_ANON_KEY")
+
+          echo "HTTP $code"
+          cat /tmp/body; echo
+
+          if [ "$code" != "200" ]; then
+            echo "::error::Supabase ping 실패 (HTTP $code) — 프로젝트가 일시정지됐거나 키가 만료됐을 수 있습니다."
+            exit 1
+          fi
+          echo "Supabase 정상 — pause 타이머 초기화됨"
