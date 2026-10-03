@@ -135,6 +135,7 @@ export const aieStorage = createSubjectStorage('aie')
 export const deV1565Storage = createSubjectStorage('de-v1565')
 export const deV1565EnStorage = createSubjectStorage('de-v1565-en')
 export const depStorage = createSubjectStorage('dep')
+export const awsDopStorage = createSubjectStorage('aws-dop')
 
 // --------------- Legacy DE functions (existing DE pages at /study, /test, /wrong unchanged) ---------------
 

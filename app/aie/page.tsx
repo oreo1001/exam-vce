@@ -36,7 +36,7 @@ export default function AIEHomePage() {
     <div className="min-h-full bg-gray-50 dark:bg-gray-950 py-12 px-4">
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center gap-3 mb-8">
-          <Link href="/" className="text-sm text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">← 과목 선택</Link>
+          <Link href="/databricks" className="text-sm text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">← 과목 선택</Link>
         </div>
 
         <div className="text-center mb-12">

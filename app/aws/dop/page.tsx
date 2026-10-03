@@ -2,24 +2,24 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { deV1565EnStorage } from '@/lib/storage'
+import { awsDopStorage } from '@/lib/storage'
 
-export default function DEEnHomePage() {
-  const [stats, setStats] = useState({ answered: 0, correct: 0, total: 228 })
+export default function AwsDopHomePage() {
+  const [stats, setStats] = useState({ answered: 0, correct: 0, total: 505 })
   const [wrongCount, setWrongCount] = useState(0)
   const [showResetConfirm, setShowResetConfirm] = useState(false)
 
   useEffect(() => {
-    setStats(deV1565EnStorage.getStudyStats(228))
-    setWrongCount(deV1565EnStorage.getWrongQuestions().length)
+    setStats(awsDopStorage.getStudyStats(505))
+    setWrongCount(awsDopStorage.getWrongQuestions().length)
   }, [])
 
   const pct = stats.answered > 0 ? Math.round((stats.correct / stats.answered) * 100) : 0
 
   const handleReset = () => {
-    deV1565EnStorage.clearStudyAnswers()
-    deV1565EnStorage.clearWrongQuestions()
-    setStats({ answered: 0, correct: 0, total: 228 })
+    awsDopStorage.clearStudyAnswers()
+    awsDopStorage.clearWrongQuestions()
+    setStats({ answered: 0, correct: 0, total: 505 })
     setWrongCount(0)
     setShowResetConfirm(false)
   }
@@ -28,19 +28,19 @@ export default function DEEnHomePage() {
     <div className="min-h-full bg-gray-50 dark:bg-gray-950 py-12 px-4">
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center gap-3 mb-8">
-          <Link href="/databricks" className="text-sm text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">← 과목 선택</Link>
+          <Link href="/aws" className="text-sm text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">← 과목 선택</Link>
         </div>
 
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-[#ff3621] rounded-2xl mb-4 shadow-lg">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-[#ff9900] rounded-2xl mb-4 shadow-lg">
             <svg className="w-9 h-9 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">
-            Data Engineer Associate
+            AWS DevOps Engineer Professional
           </h1>
-          <p className="text-gray-500 dark:text-gray-400 text-lg">228 Questions · English (v15.65)</p>
+          <p className="text-gray-500 dark:text-gray-400 text-lg">DOP-C02 · 505문제 · 한국어</p>
         </div>
 
         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 mb-8 shadow-sm">
@@ -75,14 +75,14 @@ export default function DEEnHomePage() {
             </div>
           </div>
           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-            <div className="bg-[#ff3621] h-2 rounded-full transition-all duration-500" style={{ width: `${(stats.answered / stats.total) * 100}%` }} />
+            <div className="bg-[#ff9900] h-2 rounded-full transition-all duration-500" style={{ width: `${(stats.answered / stats.total) * 100}%` }} />
           </div>
           <p className="text-xs text-gray-400 mt-2 text-right">{stats.total - stats.answered}문제 남음</p>
         </div>
 
         <div className="grid sm:grid-cols-2 gap-4 mb-6">
-          <Link href="/de-en/study" className="group block">
-            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-[#ff3621] dark:hover:border-[#ff3621] transition-all duration-200 group-hover:scale-[1.02]">
+          <Link href="/aws/dop/study" className="group block">
+            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-[#ff9900] dark:hover:border-[#ff9900] transition-all duration-200 group-hover:scale-[1.02]">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 rounded-xl bg-sky-100 dark:bg-sky-900 flex items-center justify-center">
                   <svg className="w-6 h-6 text-sky-600 dark:text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,8 +102,8 @@ export default function DEEnHomePage() {
             </div>
           </Link>
 
-          <Link href="/de-en/test" className="group block">
-            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-[#ff3621] dark:hover:border-[#ff3621] transition-all duration-200 group-hover:scale-[1.02]">
+          <Link href="/aws/dop/test" className="group block">
+            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-[#ff9900] dark:hover:border-[#ff9900] transition-all duration-200 group-hover:scale-[1.02]">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 rounded-xl bg-orange-100 dark:bg-orange-900 flex items-center justify-center">
                   <svg className="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -125,7 +125,7 @@ export default function DEEnHomePage() {
         </div>
 
         {wrongCount > 0 && (
-          <Link href="/de-en/wrong" className="block">
+          <Link href="/aws/dop/wrong" className="block">
             <div className="bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-2xl p-4 flex items-center justify-between hover:bg-red-100 dark:hover:bg-red-900 transition-colors">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900 flex items-center justify-center">
@@ -146,6 +146,7 @@ export default function DEEnHomePage() {
         )}
       </div>
 
+      {/* Reset confirmation modal */}
       {showResetConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
           <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 max-w-sm w-full shadow-xl border border-gray-200 dark:border-gray-700">

@@ -3,8 +3,8 @@ import './globals.css'
 import ThemeProvider from '@/components/ThemeProvider'
 
 export const metadata: Metadata = {
-  title: 'Databricks DE Associate 문제집',
-  description: 'Databricks Data Engineer Associate 자격증 시험 준비',
+  title: 'Exam VCE',
+  description: 'Databricks · AWS 자격증 시험 준비',
 }
 
 export default function RootLayout({

@@ -116,7 +116,7 @@ export async function dbWriteTestResult(
 // ── 로그인 시 DB → localStorage 동기화 ─────────────────
 
 export async function syncDbToLocal(userId: string) {
-  const subjects = ['de', 'genai', 'aie', 'de-v1565']
+  const subjects = ['de', 'genai', 'aie', 'de-v1565', 'aws-dop']
 
   await Promise.all(
     subjects.map(async (subject) => {

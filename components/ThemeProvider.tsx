@@ -86,6 +86,9 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
 function Nav({ dark, toggle, user }: { dark: boolean; toggle: () => void; user: User | null }) {
   const pathname = usePathname()
 
+  const isAWS = pathname.startsWith('/aws')
+  const isAwsDop = pathname.startsWith('/aws/dop')
+  const isHome = pathname === '/'
   const isGenAI = pathname.startsWith('/genai')
   const isAIE = pathname.startsWith('/aie')
   const isDeNew = pathname.startsWith('/de-new')
@@ -116,9 +119,28 @@ function Nav({ dark, toggle, user }: { dark: boolean; toggle: () => void; user: 
     <nav className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50 shadow-sm">
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Link href="/" className="font-bold text-lg text-[#ff3621] hover:text-[#cc2b1a] transition-colors">
-            Databricks Quiz
-          </Link>
+          {isHome ? (
+            <Link href="/" className="font-bold text-lg text-gray-900 dark:text-white transition-colors">
+              Exam VCE
+            </Link>
+          ) : isAWS ? (
+            <Link href="/aws" className="font-bold text-lg text-[#ff9900] hover:text-[#e68a00] transition-colors">
+              AWS Quiz
+            </Link>
+          ) : (
+            <Link href="/databricks" className="font-bold text-lg text-[#ff3621] hover:text-[#cc2b1a] transition-colors">
+              Databricks Quiz
+            </Link>
+          )}
+
+          {isAwsDop && (
+            <div className="hidden sm:flex items-center gap-1">
+              <span className="text-xs bg-orange-100 dark:bg-orange-900 text-orange-700 dark:text-orange-300 px-2 py-0.5 rounded-full font-medium mr-1">DOP-C02</span>
+              <Link href="/aws/dop/study" className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors px-2 py-1">학습 모드</Link>
+              <Link href="/aws/dop/test" className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors px-2 py-1">시험 모드</Link>
+              <Link href="/aws/dop/wrong" className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors px-2 py-1">오답 노트</Link>
+            </div>
+          )}
 
           {isGenAI && (
             <div className="hidden sm:flex items-center gap-1">
