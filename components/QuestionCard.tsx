@@ -49,7 +49,7 @@ export default function QuestionCard({
     if (isSelected) {
       return base + 'bg-sky-100 dark:bg-sky-900 border-sky-500 text-sky-800 dark:text-sky-200'
     }
-    return base + 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-750 hover:border-gray-400 dark:hover:border-gray-500'
+    return base + 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-400 dark:hover:border-gray-500'
   }
 
   function getLetterBadge(letter: string): string {
