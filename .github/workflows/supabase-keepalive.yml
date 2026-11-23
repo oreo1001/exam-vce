@@ -1,17 +1,21 @@
 name: Supabase Keep-Alive
 
-# Free Plan 프로젝트는 7일간 요청이 없으면 자동 일시정지된다.
-# 주 2회 REST 쿼리를 날려 활동 기록을 남겨 pause 를 막는다.
+# Free Plan 프로젝트는 일주일간 DB 활동이 낮으면 자동 일시정지된다.
+# 빈 SELECT(GET /rest/v1/...)만으로는 활동으로 안 잡혀 2026-11 에 3~4일 만에 계속 pause 됐다.
+# → 매일 rpc/keepalive 로 실제 UPDATE 를 일으킨다. (sql.txt 의 Keep-alive 섹션 먼저 실행할 것)
+# → 그래도 pause 돼 있으면(DNS 조회 실패 등) Management API 로 자동 restore 한다.
+#   restore 를 쓰려면 SUPABASE_ACCESS_TOKEN (https://supabase.com/dashboard/account/tokens) 시크릿 필요.
 on:
   schedule:
-    - cron: '0 3 * * 1,4' # 매주 월·목 03:00 UTC (KST 12:00)
+    - cron: '17 3 * * *' # 매일 03:17 UTC (KST 12:17) — 정각은 Actions 가 밀려서 비켜감
   workflow_dispatch:
 
 jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Supabase REST
+      - name: Ping Supabase (real write)
+        id: ping
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
@@ -21,17 +25,40 @@ jobs:
             exit 1
           fi
 
-          # RLS 때문에 결과는 항상 빈 배열이지만, 요청은 Postgres 까지 도달한다.
           code=$(curl -sS -o /tmp/body -w '%{http_code}' \
             --max-time 30 --retry 3 --retry-delay 15 --retry-all-errors \
-            "$SUPABASE_URL/rest/v1/study_answers?select=id&limit=1" \
-            -H "apikey: $SUPABASE_ANON_KEY")
+            -X POST "$SUPABASE_URL/rest/v1/rpc/keepalive" \
+            -H "apikey: $SUPABASE_ANON_KEY" \
+            -H "Authorization: Bearer $SUPABASE_ANON_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{}') || code=000
 
           echo "HTTP $code"
-          cat /tmp/body; echo
+          cat /tmp/body 2>/dev/null; echo
+          echo "code=$code" >> "$GITHUB_OUTPUT"
 
           if [ "$code" != "200" ]; then
-            echo "::error::Supabase ping 실패 (HTTP $code) — 프로젝트가 일시정지됐거나 키가 만료됐을 수 있습니다."
+            echo "::error::Supabase ping 실패 (HTTP $code) — 일시정지 상태이거나 keepalive 함수가 없습니다(sql.txt 실행 확인)."
             exit 1
           fi
-          echo "Supabase 정상 — pause 타이머 초기화됨"
+          echo "Supabase 정상 — keepalive UPDATE 완료"
+
+      - name: Auto-restore if paused
+        if: failure() && steps.ping.outputs.code == '000'
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: |
+          if [ -z "$SUPABASE_ACCESS_TOKEN" ]; then
+            echo "::warning::SUPABASE_ACCESS_TOKEN 이 없어 자동 restore 를 건너뜀 — 대시보드에서 직접 Resume 하세요."
+            exit 1
+          fi
+          ref=$(echo "$SUPABASE_URL" | sed -E 's#https?://([^.]+)\..*#\1#')
+          status=$(curl -sS "https://api.supabase.com/v1/projects/$ref" \
+            -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" | jq -r .status)
+          echo "project $ref status: $status"
+          if [ "$status" = "INACTIVE" ]; then
+            curl -sS -f -X POST "https://api.supabase.com/v1/projects/$ref/restore" \
+              -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN"
+            echo "::notice::restore 요청 보냄 — 몇 분 뒤 복구됩니다."
+          fi
